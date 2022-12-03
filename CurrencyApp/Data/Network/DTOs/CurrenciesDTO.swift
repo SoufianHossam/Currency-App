@@ -12,7 +12,7 @@ struct CurrenciesDTO: Decodable {
 }
 
 extension CurrenciesDTO {
-    var toDomain: Currencies {
-        .init(symbols: symbols.keys)
+    var asDomain: Currencies {
+        .init(symbols: symbols.keys.map(String.init(describing:)))
     }
 }

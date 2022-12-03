@@ -8,6 +8,7 @@
 import Foundation
 
 final class AppConfigurations {
+    // It's better to obfuscate the token using for example: CocoaPods-Keys
     lazy var apiKey: String = {
         guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "ApiKey") as? String else {
             fatalError("ApiKey must not be empty in plist")

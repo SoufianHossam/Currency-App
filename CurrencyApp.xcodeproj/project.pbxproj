@@ -12,6 +12,12 @@
 		3ED58579293B633700CB46E8 /* ListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED58577293B633700CB46E8 /* ListViewController.xib */; };
 		3ED58582293B77BF00CB46E8 /* Currencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED58581293B77BF00CB46E8 /* Currencies.swift */; };
 		3ED58586293B782E00CB46E8 /* CurrenciesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED58585293B782E00CB46E8 /* CurrenciesDTO.swift */; };
+		3ED5858A293B8A6300CB46E8 /* NetworkConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED58589293B8A6300CB46E8 /* NetworkConfigurations.swift */; };
+		3ED5858C293B8A7200CB46E8 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5858B293B8A7200CB46E8 /* Request.swift */; };
+		3ED5858E293BC62700CB46E8 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5858D293BC62700CB46E8 /* Endpoints.swift */; };
+		3ED58590293BCF0600CB46E8 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED5858F293BCF0600CB46E8 /* NetworkClient.swift */; };
+		3ED58594293BD70500CB46E8 /* Encodable As Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED58593293BD70500CB46E8 /* Encodable As Dictionary.swift */; };
+		3ED58598293BD7A600CB46E8 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED58597293BD7A600CB46E8 /* NetworkingManager.swift */; };
 		3ED99D48293A6AB2007A12AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED99D47293A6AB2007A12AA /* AppDelegate.swift */; };
 		3ED99D4A293A6AB2007A12AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED99D49293A6AB2007A12AA /* SceneDelegate.swift */; };
 		3ED99D4C293A6AB2007A12AA /* CurrencyConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED99D4B293A6AB2007A12AA /* CurrencyConverterViewController.swift */; };
@@ -26,6 +32,12 @@
 		3ED58577293B633700CB46E8 /* ListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListViewController.xib; sourceTree = "<group>"; };
 		3ED58581293B77BF00CB46E8 /* Currencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currencies.swift; sourceTree = "<group>"; };
 		3ED58585293B782E00CB46E8 /* CurrenciesDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesDTO.swift; sourceTree = "<group>"; };
+		3ED58589293B8A6300CB46E8 /* NetworkConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfigurations.swift; sourceTree = "<group>"; };
+		3ED5858B293B8A7200CB46E8 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		3ED5858D293BC62700CB46E8 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
+		3ED5858F293BCF0600CB46E8 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		3ED58593293BD70500CB46E8 /* Encodable As Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable As Dictionary.swift"; sourceTree = "<group>"; };
+		3ED58597293BD7A600CB46E8 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		3ED99D44293A6AB2007A12AA /* CurrencyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurrencyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ED99D47293A6AB2007A12AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3ED99D49293A6AB2007A12AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +70,9 @@
 		3ED5857B293B6FB800CB46E8 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				3ED58589293B8A6300CB46E8 /* NetworkConfigurations.swift */,
+				3ED5858B293B8A7200CB46E8 /* Request.swift */,
+				3ED5858F293BCF0600CB46E8 /* NetworkClient.swift */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -65,6 +80,7 @@
 		3ED5857C293B6FC300CB46E8 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				3ED58591293BD0BC00CB46E8 /* Repositories */,
 				3ED58583293B780B00CB46E8 /* Network */,
 			);
 			path = Data;
@@ -108,6 +124,8 @@
 		3ED58583293B780B00CB46E8 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				3ED5858D293BC62700CB46E8 /* Endpoints.swift */,
+				3ED58592293BD6F800CB46E8 /* Extensions */,
 				3ED58584293B781A00CB46E8 /* DTOs */,
 			);
 			path = Network;
@@ -139,6 +157,38 @@
 			path = "Currency Converter";
 			sourceTree = "<group>";
 		};
+		3ED58591293BD0BC00CB46E8 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		3ED58592293BD6F800CB46E8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3ED58593293BD70500CB46E8 /* Encodable As Dictionary.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3ED58595293BD73000CB46E8 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				3ED58596293BD73600CB46E8 /* Managers */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		3ED58596293BD73600CB46E8 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				3ED99D5B293A7827007A12AA /* AppConfigurations.swift */,
+				3ED58597293BD7A600CB46E8 /* NetworkingManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		3ED99D3B293A6AB2007A12AA = {
 			isa = PBXGroup;
 			children = (
@@ -160,7 +210,7 @@
 			children = (
 				3ED99D47293A6AB2007A12AA /* AppDelegate.swift */,
 				3ED99D49293A6AB2007A12AA /* SceneDelegate.swift */,
-				3ED99D5B293A7827007A12AA /* AppConfigurations.swift */,
+				3ED58595293BD73000CB46E8 /* Application */,
 				3ED5857D293B6FCA00CB46E8 /* Presentation */,
 				3ED5857A293B6FAF00CB46E8 /* Domain */,
 				3ED5857C293B6FC300CB46E8 /* Data */,
@@ -242,12 +292,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ED58590293BCF0600CB46E8 /* NetworkClient.swift in Sources */,
 				3ED58582293B77BF00CB46E8 /* Currencies.swift in Sources */,
 				3ED58586293B782E00CB46E8 /* CurrenciesDTO.swift in Sources */,
+				3ED58594293BD70500CB46E8 /* Encodable As Dictionary.swift in Sources */,
+				3ED5858A293B8A6300CB46E8 /* NetworkConfigurations.swift in Sources */,
 				3ED99D4C293A6AB2007A12AA /* CurrencyConverterViewController.swift in Sources */,
+				3ED5858E293BC62700CB46E8 /* Endpoints.swift in Sources */,
 				3ED99D48293A6AB2007A12AA /* AppDelegate.swift in Sources */,
+				3ED58598293BD7A600CB46E8 /* NetworkingManager.swift in Sources */,
 				3ED99D5C293A7827007A12AA /* AppConfigurations.swift in Sources */,
 				3ED58578293B633700CB46E8 /* ListViewController.swift in Sources */,
+				3ED5858C293B8A7200CB46E8 /* Request.swift in Sources */,
 				3ED99D4A293A6AB2007A12AA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
