@@ -1,32 +1,57 @@
-//
+//  
 //  CurrencyConverterViewController.swift
 //  CurrencyApp
 //
-//  Created by Soufian Hossam on 02/12/2022.
+//  Created by Soufian Hossam on 04/12/2022.
 //
 
 import UIKit
 
 class CurrencyConverterViewController: UIViewController {
+    // MARK: Outlets
     @IBOutlet weak var fromButton: UIButton!
-    
+
+    // MARK: Properties
+    private let viewModel: CurrencyConverterViewModelType
     private let listViewController = ListViewController()
     
-    let list = ["HUF", "NOK", "PLN", "VUV", "BWP", "XDR", "UAH", "TZS", "ANG", "BTC", "BIF", "SGD", "XAF", "XAU", "AOA", "TOP", "MWK", "OMR", "ISK", "BOB", "LTL", "AZN", "LSL", "PYG", "IRR", "SDG", "USD", "WST", "HTG", "SLL", "JOD", "STD", "LBP", "PHP", "PEN", "JMD", "BBD", "AUD", "ZMK", "MMK", "KPW", "CHF", "KYD", "FKP", "AWG", "RWF", "TJS", "EGP", "CAD", "KRW", "COP", "BTN", "GIP", "HKD", "MYR", "DZD", "BZD", "CVE", "SLE", "IDR", "TTD", "NPR", "HNL", "BDT", "UZS", "CUC", "INR", "UGX", "NAD", "FJD", "SCR", "AMD", "PAB", "ETB", "MNT", "MZN", "BYR", "TMT", "RON", "GEL", "ILS", "SBD", "TRY", "BYN", "CRC", "PKR", "HRK", "MUR", "ZWL", "ERN", "MXN", "LVL", "AED", "DKK", "LAK", "MAD", "SYP", "RUB", "SRD", "VND", "SAR", "AFN", "NGN", "GMD", "SHP", "BAM", "MVR", "CNY", "UYU", "EUR", "ZAR", "SVC", "CUP", "MRO", "LRD", "ALL", "XPF", "SZL", "THB", "SEK", "NZD", "DJF", "XAG", "GYD", "MKD", "LYD", "IMP", "ZMW", "GTQ", "NIO", "MOP", "CLP", "GGP", "GNF", "GBP", "BSD", "SOS", "KMF", "VEF", "KWD", "RSD", "JPY", "BGN", "KES", "BRL", "ARS", "JEP", "DOP", "KHR", "CZK", "BMD", "YER", "GHS", "KZT", "CDF", "KGS", "TWD", "BND", "IQD", "MGA", "QAR", "LKR", "CLF", "TND", "BHD", "MDL", "XOF", "XCD", "PGK"]
+    // MARK: Init
+    init(viewModel: CurrencyConverterViewModelType) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: Lifecycle
+    var list: [String] = [] {
+        didSet {
+            listViewController.items = list.sorted()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        listViewController.items = list.sorted()
+        
+        ListCurrencySymbolsUseCase().fetchCurrencySymbols { [weak self] result in
+            switch result {
+            case .success(let value):
+                self?.list = value.symbols
+                print(value.symbols)
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
         listViewController.didSelectItem = { item in
             print(item)
         }
     }
 
     @IBAction func fromButtonAction(_ sender: UIButton) {
-        
-        
         present(listViewController, animated: true)
     }
-
 }
-

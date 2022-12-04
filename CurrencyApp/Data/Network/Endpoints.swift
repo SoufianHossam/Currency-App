@@ -7,6 +7,8 @@
 
 import Foundation
 
-enum Endpoints: String {
-    case symbols
+enum Endpoints {
+    static func currencySymbols() -> Request<CurrenciesDTO> {
+        .init(path: "symbols")
+    }
 }
