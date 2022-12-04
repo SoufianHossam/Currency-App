@@ -1,32 +1,100 @@
-//
+//  
 //  CurrencyConverterViewController.swift
 //  CurrencyApp
 //
-//  Created by Soufian Hossam on 02/12/2022.
+//  Created by Soufian Hossam on 04/12/2022.
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class CurrencyConverterViewController: UIViewController {
-    @IBOutlet weak var fromButton: UIButton!
+    // MARK: Outlets
+    @IBOutlet private weak var fromButton: UIButton!
+    @IBOutlet private weak var toButton: UIButton!
+    @IBOutlet private weak var swapButton: UIButton!
+    @IBOutlet private weak var fromTextField: UITextField!
+    @IBOutlet private weak var toTextField: UITextField!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
+    // MARK: Properties
+    private let viewModel: CurrencyConverterViewModelType
     private let listViewController = ListViewController()
+    private let bag: DisposeBag = .init()
     
-    let list = ["HUF", "NOK", "PLN", "VUV", "BWP", "XDR", "UAH", "TZS", "ANG", "BTC", "BIF", "SGD", "XAF", "XAU", "AOA", "TOP", "MWK", "OMR", "ISK", "BOB", "LTL", "AZN", "LSL", "PYG", "IRR", "SDG", "USD", "WST", "HTG", "SLL", "JOD", "STD", "LBP", "PHP", "PEN", "JMD", "BBD", "AUD", "ZMK", "MMK", "KPW", "CHF", "KYD", "FKP", "AWG", "RWF", "TJS", "EGP", "CAD", "KRW", "COP", "BTN", "GIP", "HKD", "MYR", "DZD", "BZD", "CVE", "SLE", "IDR", "TTD", "NPR", "HNL", "BDT", "UZS", "CUC", "INR", "UGX", "NAD", "FJD", "SCR", "AMD", "PAB", "ETB", "MNT", "MZN", "BYR", "TMT", "RON", "GEL", "ILS", "SBD", "TRY", "BYN", "CRC", "PKR", "HRK", "MUR", "ZWL", "ERN", "MXN", "LVL", "AED", "DKK", "LAK", "MAD", "SYP", "RUB", "SRD", "VND", "SAR", "AFN", "NGN", "GMD", "SHP", "BAM", "MVR", "CNY", "UYU", "EUR", "ZAR", "SVC", "CUP", "MRO", "LRD", "ALL", "XPF", "SZL", "THB", "SEK", "NZD", "DJF", "XAG", "GYD", "MKD", "LYD", "IMP", "ZMW", "GTQ", "NIO", "MOP", "CLP", "GGP", "GNF", "GBP", "BSD", "SOS", "KMF", "VEF", "KWD", "RSD", "JPY", "BGN", "KES", "BRL", "ARS", "JEP", "DOP", "KHR", "CZK", "BMD", "YER", "GHS", "KZT", "CDF", "KGS", "TWD", "BND", "IQD", "MGA", "QAR", "LKR", "CLF", "TND", "BHD", "MDL", "XOF", "XCD", "PGK"]
-    
+    // MARK: Init
+    init(viewModel: CurrencyConverterViewModelType) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        listViewController.items = list.sorted()
-        listViewController.didSelectItem = { item in
-            print(item)
+
+        setupBindings()
+        
+        viewModel.fetchCurrencySymbols()
+    }
+    
+    // MARK: Actions
+    @IBAction private func fromButtonAction(_ sender: UIButton) {
+        present(listViewController, animated: true)
+        
+        listViewController.didSelectItem = { [fromButton] item in
+            fromButton?.setTitle(item, for: .normal)
         }
     }
-
-    @IBAction func fromButtonAction(_ sender: UIButton) {
-        
-        
+    
+    @IBAction private func toButtonAction(_ sender: UIButton) {
         present(listViewController, animated: true)
+        
+        listViewController.didSelectItem = { [toButton] item in
+            toButton?.setTitle(item, for: .normal)
+        }
     }
-
+    
+    @IBAction private func swapButtonAction(_ sender: UIButton) {
+        print("Swapped")
+    }
 }
 
+// MARK: Helpers
+extension CurrencyConverterViewController {
+    private func setupBindings() {
+        viewModel.isLoading
+            .drive(activityIndicator.rx.isAnimating)
+            .disposed(by: bag)
+        
+        viewModel.isLoading
+            .map { $0 ? 1 : 0 }
+            .drive(activityIndicator.rx.alpha)
+            .disposed(by: bag)
+        
+        viewModel.isLoading
+            .map { !$0 }
+            .drive(
+                fromButton.rx.isEnabled,
+                toButton.rx.isEnabled,
+                swapButton.rx.isEnabled
+            )
+            .disposed(by: bag)
+        
+        viewModel.currencySymbols
+            .drive { [listViewController] list in
+                listViewController.items = list
+            }
+            .disposed(by: bag)
+        
+        viewModel.errorMessage
+            .emit { message in
+                print(message)
+            }
+            .disposed(by: bag)
+    }
+}
