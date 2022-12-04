@@ -4,12 +4,17 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CurrencyConverterViewController" customModule="CurrencyApp" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="AKo-gZ-1fa" id="CoV-L2-vJn"/>
+                <outlet property="fromButton" destination="H9e-or-aTD" id="7uj-2p-tir"/>
+                <outlet property="fromTextField" destination="cNs-O5-O0h" id="4RA-Pf-9NH"/>
+                <outlet property="swapButton" destination="m7X-bE-KIH" id="0dT-CI-m8k"/>
+                <outlet property="toButton" destination="b1V-n9-q8B" id="c01-li-etQ"/>
+                <outlet property="toTextField" destination="n7L-NT-rrO" id="pOe-8i-0Yx"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Kwv-D9-DZa"/>
             </connections>
         </placeholder>
@@ -18,24 +23,75 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H9e-or-aTD">
-                    <rect key="frame" x="174" y="433" width="67" height="31"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="filled" title="Button"/>
-                    <connections>
-                        <action selector="fromButtonAction:" destination="-1" eventType="touchUpInside" id="2T9-KV-o0K"/>
-                    </connections>
-                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="IG8-tB-Gqz">
+                    <rect key="frame" x="62" y="357" width="290" height="182"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="xco-5f-Zgw">
+                            <rect key="frame" x="0.0" y="0.0" width="290" height="31"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H9e-or-aTD">
+                                    <rect key="frame" x="0.0" y="0.0" width="83.5" height="31"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled" title="From">
+                                        <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                                    </buttonConfiguration>
+                                    <connections>
+                                        <action selector="fromButtonAction:" destination="-1" eventType="touchUpInside" id="2T9-KV-o0K"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7X-bE-KIH">
+                                    <rect key="frame" x="103.5" y="0.0" width="83" height="31"/>
+                                    <color key="tintColor" red="0.55886280290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled" title="Swap">
+                                        <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                                    </buttonConfiguration>
+                                    <connections>
+                                        <action selector="swapButtonAction:" destination="-1" eventType="touchUpInside" id="lr5-ve-j0A"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b1V-n9-q8B">
+                                    <rect key="frame" x="206.5" y="0.0" width="83.5" height="31"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled" title="To">
+                                        <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                                    </buttonConfiguration>
+                                    <connections>
+                                        <action selector="toButtonAction:" destination="-1" eventType="touchUpInside" id="fLj-kF-Qic"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="hWZ-ce-4oA">
+                            <rect key="frame" x="0.0" y="71" width="290" height="34"/>
+                            <subviews>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="From" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cNs-O5-O0h">
+                                    <rect key="frame" x="0.0" y="0.0" width="125" height="34"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="To" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n7L-NT-rrO">
+                                    <rect key="frame" x="165" y="0.0" width="125" height="34"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                        </stackView>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="AKo-gZ-1fa">
+                            <rect key="frame" x="0.0" y="145" width="290" height="37"/>
+                            <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </activityIndicatorView>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBrownColor"/>
-            <point key="canvasLocation" x="139" y="125"/>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="IG8-tB-Gqz" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.7" id="5ut-Xp-Nah"/>
+                <constraint firstItem="IG8-tB-Gqz" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="p0B-HS-Jpl"/>
+                <constraint firstItem="IG8-tB-Gqz" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qtv-bR-KDH"/>
+            </constraints>
+            <point key="canvasLocation" x="-457.97101449275368" y="126.5625"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-    </resources>
 </document>

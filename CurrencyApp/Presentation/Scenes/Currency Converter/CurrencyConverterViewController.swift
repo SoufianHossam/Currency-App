@@ -7,11 +7,17 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 class CurrencyConverterViewController: UIViewController {
     // MARK: Outlets
-    @IBOutlet weak var fromButton: UIButton!
-
+    @IBOutlet private weak var fromButton: UIButton!
+    @IBOutlet private weak var toButton: UIButton!
+    @IBOutlet private weak var swapButton: UIButton!
+    @IBOutlet private weak var fromTextField: UITextField!
+    @IBOutlet private weak var toTextField: UITextField!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    
     // MARK: Properties
     private let viewModel: CurrencyConverterViewModelType
     private let listViewController = ListViewController()
@@ -30,31 +36,65 @@ class CurrencyConverterViewController: UIViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        viewModel.fetchCurrencySymbols()
-        
-        setupListViewController()
+
         setupBindings()
         
+        viewModel.fetchCurrencySymbols()
     }
-
-    @IBAction func fromButtonAction(_ sender: UIButton) {
+    
+    // MARK: Actions
+    @IBAction private func fromButtonAction(_ sender: UIButton) {
         present(listViewController, animated: true)
+        
+        listViewController.didSelectItem = { [fromButton] item in
+            fromButton?.setTitle(item, for: .normal)
+        }
+    }
+    
+    @IBAction private func toButtonAction(_ sender: UIButton) {
+        present(listViewController, animated: true)
+        
+        listViewController.didSelectItem = { [toButton] item in
+            toButton?.setTitle(item, for: .normal)
+        }
+    }
+    
+    @IBAction private func swapButtonAction(_ sender: UIButton) {
+        print("Swapped")
     }
 }
 
+// MARK: Helpers
 extension CurrencyConverterViewController {
-    func setupBindings() {
+    private func setupBindings() {
+        viewModel.isLoading
+            .drive(activityIndicator.rx.isAnimating)
+            .disposed(by: bag)
+        
+        viewModel.isLoading
+            .map { $0 ? 1 : 0 }
+            .drive(activityIndicator.rx.alpha)
+            .disposed(by: bag)
+        
+        viewModel.isLoading
+            .map { !$0 }
+            .drive(
+                fromButton.rx.isEnabled,
+                toButton.rx.isEnabled,
+                swapButton.rx.isEnabled
+            )
+            .disposed(by: bag)
+        
         viewModel.currencySymbols
             .drive { [listViewController] list in
                 listViewController.items = list
             }
             .disposed(by: bag)
-    }
-    
-    func setupListViewController() {
-        listViewController.didSelectItem = { item in
-            print(item)
-        }
+        
+        viewModel.errorMessage
+            .emit { message in
+                print(message)
+            }
+            .disposed(by: bag)
     }
 }
