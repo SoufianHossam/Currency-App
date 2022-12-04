@@ -15,13 +15,31 @@ struct CurrencySymbolsRepository: CurrencySymbolsRepositoryProtocol {
     }
     
     func fetchCurrencySymbols(completion: @escaping (Result<Currencies, Error>) -> Void) {
-        let urlRequest = Endpoints.currencySymbols()
+        let request = Endpoints.currencySymbols()
         
-        networkClient.request(urlRequest) { result in
+        networkClient.request(request) { result in
             switch result {
             case .success(let value):
                 completion(.success(value.asDomain))
             
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func convertCurrency(_ input: Conversion, completion: @escaping (Result<ConvertedAmount, Error>) -> Void) {
+        let request = Endpoints.convert(.init(
+            fromCurrency: input.fromCurrency,
+            toCurrency: input.toCurrency,
+            amount: input.amount
+        ))
+        
+        networkClient.request(request) { result in
+            switch result {
+            case .success(let value):
+                completion(.success(value.asDomain))
+                
             case .failure(let error):
                 completion(.failure(error))
             }
