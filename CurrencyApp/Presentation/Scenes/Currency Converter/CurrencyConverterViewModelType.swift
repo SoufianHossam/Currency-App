@@ -5,7 +5,8 @@
 //  Created by Soufian Hossam on 04/12/2022.
 //
 
-import Foundation
+import RxRelay
+import RxCocoa
 
 /// CurrencyConverter Input & Output
 ///
@@ -13,8 +14,13 @@ typealias CurrencyConverterViewModelType = CurrencyConverterViewModelInput & Cur
 
 /// CurrencyConverter ViewModel Input
 ///
-protocol CurrencyConverterViewModelInput {}
+protocol CurrencyConverterViewModelInput {
+    func fetchCurrencySymbols()
+}
 
 /// CurrencyConverter ViewModel Output
 ///
-protocol CurrencyConverterViewModelOutput {}
+protocol CurrencyConverterViewModelOutput {
+    var currencySymbols: Driver<[String]> { get }
+    var errorMessage: Signal<String> { get }
+}

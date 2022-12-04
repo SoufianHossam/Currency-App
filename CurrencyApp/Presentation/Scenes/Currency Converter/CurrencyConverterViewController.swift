@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class CurrencyConverterViewController: UIViewController {
     // MARK: Outlets
@@ -14,6 +15,7 @@ class CurrencyConverterViewController: UIViewController {
     // MARK: Properties
     private let viewModel: CurrencyConverterViewModelType
     private let listViewController = ListViewController()
+    private let bag: DisposeBag = .init()
     
     // MARK: Init
     init(viewModel: CurrencyConverterViewModelType) {
@@ -26,32 +28,33 @@ class CurrencyConverterViewController: UIViewController {
     }
 
     // MARK: Lifecycle
-    var list: [String] = [] {
-        didSet {
-            listViewController.items = list.sorted()
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ListCurrencySymbolsUseCase().fetchCurrencySymbols { [weak self] result in
-            switch result {
-            case .success(let value):
-                self?.list = value.symbols
-                print(value.symbols)
-                
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+        viewModel.fetchCurrencySymbols()
         
-        listViewController.didSelectItem = { item in
-            print(item)
-        }
+        setupListViewController()
+        setupBindings()
+        
     }
 
     @IBAction func fromButtonAction(_ sender: UIButton) {
         present(listViewController, animated: true)
+    }
+}
+
+extension CurrencyConverterViewController {
+    func setupBindings() {
+        viewModel.currencySymbols
+            .drive { [listViewController] list in
+                listViewController.items = list
+            }
+            .disposed(by: bag)
+    }
+    
+    func setupListViewController() {
+        listViewController.didSelectItem = { item in
+            print(item)
+        }
     }
 }
