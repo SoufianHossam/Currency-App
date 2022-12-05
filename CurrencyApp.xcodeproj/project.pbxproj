@@ -506,7 +506,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				API_BASE_URL = "https://api.apilayer.com/fixer/";
-				API_KEY = 52OsCCtGeXJRNYw6wrW7a5bocfL66FD9;
+				API_KEY = dlvBthberLJo2Tba9CrsuXz5VGNnDVUs;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -534,7 +534,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				API_BASE_URL = "https://api.apilayer.com/fixer/";
-				API_KEY = 52OsCCtGeXJRNYw6wrW7a5bocfL66FD9;
+				API_KEY = dlvBthberLJo2Tba9CrsuXz5VGNnDVUs;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;

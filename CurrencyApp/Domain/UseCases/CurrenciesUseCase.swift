@@ -24,6 +24,17 @@ struct CurrenciesUseCase: CurrenciesUseCaseProtocol {
     }
     
     func convertCurrency(_ input: Conversion, completion: @escaping (Result<ConvertedAmount, Error>) -> Void) {
-        currenciesRepo.convertCurrency(input, completion: completion)
+        var cloneInput: Conversion = input
+        
+        if case .to = input.amount {
+            let updatedInput: Conversion = .init(
+                fromCurrency: input.toCurrency,
+                toCurrency: input.fromCurrency,
+                amount: input.amount
+            )
+            cloneInput = updatedInput
+        }
+        
+        currenciesRepo.convertCurrency(cloneInput, completion: completion)
     }
 }

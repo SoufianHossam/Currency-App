@@ -37,6 +37,7 @@ class CurrencyConverterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupTextFields()
         setupBindings()
         
         viewModel.fetchCurrencySymbols()
@@ -46,16 +47,18 @@ class CurrencyConverterViewController: UIViewController {
     @IBAction private func fromButtonAction(_ sender: UIButton) {
         present(listViewController, animated: true)
         
-        listViewController.didSelectItem = { [fromButton] item in
-            fromButton?.setTitle(item, for: .normal)
+        listViewController.didSelectItem = { [weak self] item in
+            self?.fromButton?.setTitle(item, for: .normal)
+            self?.viewModel.fromCurrencyRelay.accept(item)
         }
     }
     
     @IBAction private func toButtonAction(_ sender: UIButton) {
         present(listViewController, animated: true)
         
-        listViewController.didSelectItem = { [toButton] item in
-            toButton?.setTitle(item, for: .normal)
+        listViewController.didSelectItem = { [weak self] item in
+            self?.toButton?.setTitle(item, for: .normal)
+            self?.viewModel.toCurrencyRelay.accept(item)
         }
     }
     
@@ -66,6 +69,13 @@ class CurrencyConverterViewController: UIViewController {
 
 // MARK: Helpers
 extension CurrencyConverterViewController {
+    private func setupTextFields() {
+        fromTextField.text = "\(viewModel.initialAmount)"
+        
+        fromTextField.keyboardType = .decimalPad
+        toTextField.keyboardType = .decimalPad
+    }
+    
     private func setupBindings() {
         viewModel.isLoading
             .drive(activityIndicator.rx.isAnimating)
@@ -95,6 +105,43 @@ extension CurrencyConverterViewController {
             .emit { message in
                 print(message)
             }
+            .disposed(by: bag)
+        
+        fromTextField.rx.text
+            .orEmpty
+            .distinctUntilChanged()
+            .map { .from(Double($0) ?? 0) }
+            .bind(to: viewModel.amountRelay)
+            .disposed(by: bag)
+        
+        toTextField.rx.text
+            .orEmpty
+            .skip(1)
+            .distinctUntilChanged()
+            .map { .to(Double($0) ?? 0) }
+            .bind(to: viewModel.amountRelay)
+            .disposed(by: bag)
+        
+        viewModel.convertedCurrency
+            .drive { [weak self] in
+                switch $0 {
+                case .to:
+                    self?.fromTextField.text = "\($0.value)"
+                    
+                case .from:
+                    self?.toTextField.text = "\($0.value)"
+                }
+            }
+            .disposed(by: bag)
+        
+        viewModel.fromCurrencyRelay
+            .skip(1)
+            .bind(to: fromButton.rx.title(for: .normal))
+            .disposed(by: bag)
+        
+        viewModel.toCurrencyRelay
+            .skip(1)
+            .bind(to: toButton.rx.title(for: .normal))
             .disposed(by: bag)
     }
 }

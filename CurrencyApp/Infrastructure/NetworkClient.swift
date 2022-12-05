@@ -35,6 +35,10 @@ struct NetworkClient: NetworkClientProtocol {
                     return
                 }
                 
+                #if DEBUG
+                print(String(data: data, encoding: .utf8)!)
+                #endif
+                
                 do {
                     let response = try request.parse(data)
                     completion(.success(response))
