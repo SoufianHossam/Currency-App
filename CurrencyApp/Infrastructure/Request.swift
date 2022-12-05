@@ -49,7 +49,7 @@ extension Request {
 
 extension Request {
     func asURLRequest() throws -> URLRequest {
-        guard var url = URL(string: NetworkConfigurations.baseURI + path) else {
+        guard let url = URL(string: NetworkConfigurations.baseURI + path) else {
             throw NetworkError.invalidURL
         }
         
@@ -76,7 +76,7 @@ extension Request {
                 throw NetworkError.invalidURL
             }
             
-            url = componentsQueryURL
+            urlRequest.url = componentsQueryURL
             
         case .post:
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])

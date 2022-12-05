@@ -1,5 +1,5 @@
 //
-//  CurrencySymbolsRepository.swift
+//  CurrenciesRepository.swift
 //  CurrencyApp
 //
 //  Created by Soufian Hossam on 04/12/2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CurrencySymbolsRepository: CurrencySymbolsRepositoryProtocol {
+struct CurrenciesRepository: CurrenciesRepositoryProtocol {
     let networkClient: NetworkClientProtocol
     
     init(_ networkClient: NetworkClientProtocol = NetworkClient()) {
@@ -30,9 +30,9 @@ struct CurrencySymbolsRepository: CurrencySymbolsRepositoryProtocol {
     
     func convertCurrency(_ input: Conversion, completion: @escaping (Result<ConvertedAmount, Error>) -> Void) {
         let request = Endpoints.convert(.init(
+            amount: input.amount,
             fromCurrency: input.fromCurrency,
-            toCurrency: input.toCurrency,
-            amount: input.amount
+            toCurrency: input.toCurrency
         ))
         
         networkClient.request(request) { result in

@@ -1,5 +1,5 @@
 //
-//  ListCurrencySymbolsUseCase.swift
+//  CurrenciesUseCase.swift
 //  CurrencyApp
 //
 //  Created by Soufian Hossam on 04/12/2022.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol ListCurrencySymbolsUseCaseProtocol {
+protocol CurrenciesUseCaseProtocol {
     func fetchCurrencySymbols(completion: @escaping (Result<Currencies, Error>) -> Void)
 }
 
-struct ListCurrencySymbolsUseCase: ListCurrencySymbolsUseCaseProtocol {
+struct ListCurrencySymbolsUseCase: CurrenciesUseCaseProtocol {
     private let currencySymbolsRepo: CurrencySymbolsRepositoryProtocol
     
     init(_ currencySymbolsRepo: CurrencySymbolsRepositoryProtocol = CurrencySymbolsRepository()) {

@@ -11,15 +11,15 @@ import RxCocoa
 // MARK: CurrencyConverterViewModel
 class CurrencyConverterViewModel {
     // Properties
-    let listCurrencySymbolsUseCase: ListCurrencySymbolsUseCaseProtocol
+    let currenciesUseCase: CurrenciesUseCaseProtocol
     
     // RX Properties
     private let currencySymbolsRelay: BehaviorRelay<[String]> = .init(value: [])
     private let errorMessageRelay: PublishRelay<String> = .init()
     private let isLoadingRelay: PublishRelay<Bool> = .init()
     
-    init(_ listCurrencySymbolsUseCase: ListCurrencySymbolsUseCaseProtocol = ListCurrencySymbolsUseCase()) {
-        self.listCurrencySymbolsUseCase = listCurrencySymbolsUseCase
+    init(_ currenciesUseCase: CurrenciesUseCaseProtocol = CurrenciesUseCase()) {
+        self.currenciesUseCase = currenciesUseCase
     }
 }
 
@@ -28,7 +28,7 @@ extension CurrencyConverterViewModel: CurrencyConverterViewModelInput {
     func fetchCurrencySymbols() {
         isLoadingRelay.accept(true)
         
-        listCurrencySymbolsUseCase.fetchCurrencySymbols { [isLoadingRelay, currencySymbolsRelay, errorMessageRelay] result in
+        currenciesUseCase.fetchCurrencySymbols { [isLoadingRelay, currencySymbolsRelay, errorMessageRelay] result in
             isLoadingRelay.accept(false)
             
             switch result {
@@ -43,7 +43,25 @@ extension CurrencyConverterViewModel: CurrencyConverterViewModelInput {
     }
     
     func swapTheConversion() {
+        isLoadingRelay.accept(true)
+
+        let input: Conversion = .init(
+            fromCurrency: "USD",
+            toCurrency: "EGP",
+            amount: 1
+        )
         
+        currenciesUseCase.convertCurrency(input) { [isLoadingRelay, errorMessageRelay] result in
+            isLoadingRelay.accept(false)
+
+            switch result {
+            case .success(let value):
+                print(value.value)
+                
+            case .failure(let error):
+                errorMessageRelay.accept(error.localizedDescription)
+            }
+        }
     }
 }
 

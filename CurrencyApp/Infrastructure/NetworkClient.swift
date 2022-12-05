@@ -13,20 +13,6 @@ protocol NetworkClientProtocol {
 
 struct NetworkClient: NetworkClientProtocol {
     func request<T>(_ request: Request<T>, completion: @escaping (Result<T, NetworkError>) -> Void) {
-        execute(request) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let value):
-                    completion(.success(value))
-                    
-                case .failure(let error):
-                    completion(.failure(error))
-                }
-            }
-        }
-    }
-    
-    private func execute<T>(_ request: Request<T>, completion: @escaping (Result<T, NetworkError>) -> Void) {
         do {
             let urlRequest = try request.asURLRequest()
             

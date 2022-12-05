@@ -60,7 +60,7 @@ class CurrencyConverterViewController: UIViewController {
     }
     
     @IBAction private func swapButtonAction(_ sender: UIButton) {
-        print("Swapped")
+        viewModel.swapTheConversion()
     }
 }
 

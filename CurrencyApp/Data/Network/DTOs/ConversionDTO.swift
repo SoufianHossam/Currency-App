@@ -8,9 +8,15 @@
 import Foundation
 
 struct ConversionDTO: Encodable {
+    let amount: Double
     let fromCurrency: String
     let toCurrency: String
-    let amount: Double
+    
+    enum CodingKeys: String, CodingKey {
+        case amount
+        case fromCurrency = "from"
+        case toCurrency = "to"
+    }
 }
 
 struct ConvertedAmountDTO: Decodable {
