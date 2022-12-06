@@ -45,4 +45,23 @@ struct CurrenciesRepository: CurrenciesRepositoryProtocol {
             }
         }
     }
+    
+    func fetchHistoricalData(_ input: HistoricalDataInput, completion: @escaping (Result<HistoricalData, Error>) -> Void) {
+        let request = Endpoints.historicalData(.init(
+            fromCurrency: input.fromCurrency,
+            toCurrency: input.toCurrency,
+            startDate: input.date.jumpBack(by: 3).asString,
+            endDate: input.date.jumpBack(by: 1).asString
+        ))
+        
+        networkClient.request(request) { result in
+            switch result {
+            case .success(let value):
+                completion(.success(value.asDomain))
+                
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

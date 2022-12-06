@@ -10,6 +10,7 @@ import Foundation
 protocol CurrenciesUseCaseProtocol {
     func fetchCurrencySymbols(completion: @escaping (Result<Currencies, Error>) -> Void)
     func convertCurrency(_ input: Conversion, completion: @escaping (Result<ConvertedAmount, Error>) -> Void)
+    func fetchHistoricalData(_ input: HistoricalDataInput, completion: @escaping (Result<HistoricalData, Error>) -> Void)
 }
 
 struct CurrenciesUseCase: CurrenciesUseCaseProtocol {
@@ -36,5 +37,9 @@ struct CurrenciesUseCase: CurrenciesUseCaseProtocol {
         }
         
         currenciesRepo.convertCurrency(cloneInput, completion: completion)
+    }
+    
+    func fetchHistoricalData(_ input: HistoricalDataInput, completion: @escaping (Result<HistoricalData, Error>) -> Void) {
+        currenciesRepo.fetchHistoricalData(input, completion: completion)
     }
 }

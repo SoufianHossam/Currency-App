@@ -87,6 +87,15 @@ extension CurrencyConverterViewModel: CurrencyConverterViewModelOutput {
         )
         .map { !$0.0.isEmpty && !$0.1.isEmpty }
     }
+    
+    var selectedCurrenciesDetails: Observable<(String, String)> {
+        detailsRelay
+            .asObservable()
+            .skip(until: isCurrenciesSelected)
+            .map { _ in
+                (self.fromCurrencyRelay.value, self.toCurrencyRelay.value)
+            }
+    }
 }
 
 extension CurrencyConverterViewModel {
@@ -108,11 +117,6 @@ extension CurrencyConverterViewModel {
             )
             self?.convert(input)
         }
-        .disposed(by: bag)
-        
-        detailsRelay.subscribe(onNext: {
-            
-        })
         .disposed(by: bag)
     }
     

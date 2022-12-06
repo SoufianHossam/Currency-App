@@ -15,4 +15,8 @@ enum Endpoints {
     static func convert(_ input: ConversionDTO) -> Request<ConvertedAmountDTO> {
         .init(path: "convert", parameters: try? input.asDictionary())
     }
+    
+    static func historicalData(_ input: HistoricalDataRequestDTO) -> Request<HistoricalDataResponseDTO> {
+        .init(path: "timeseries", parameters: try? input.asDictionary())
+    }
 }

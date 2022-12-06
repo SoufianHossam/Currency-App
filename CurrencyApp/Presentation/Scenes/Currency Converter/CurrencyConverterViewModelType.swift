@@ -34,4 +34,5 @@ protocol CurrencyConverterViewModelOutput {
     var errorMessage: Signal<String> { get }
     var isLoading: Driver<Bool> { get }
     var isCurrenciesSelected: Observable<Bool> { get }
+    var selectedCurrenciesDetails: Observable<(String, String)> { get }
 }

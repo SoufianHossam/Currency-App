@@ -152,5 +152,12 @@ extension CurrencyConverterViewController {
         detailsButton.rx.tap
             .bind(to: viewModel.detailsRelay)
             .disposed(by: bag)
+        
+        viewModel.selectedCurrenciesDetails
+            .subscribe(with: self) { viewController, currencies in
+                print(currencies)
+                viewController.present(ListViewController(), animated: true)
+            }
+            .disposed(by: bag)
     }
 }
