@@ -26,7 +26,6 @@ protocol CurrencyConverterViewModelInput {
 /// CurrencyConverter ViewModel Output
 ///
 protocol CurrencyConverterViewModelOutput {
-    var initialAmount: Double { get }
     var convertedCurrency: Driver<Conversion.ConversionDirection> { get }
     var currencySymbols: Driver<[String]> { get }
     var errorMessage: Signal<String> { get }

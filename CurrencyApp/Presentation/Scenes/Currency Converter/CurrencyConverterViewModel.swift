@@ -22,7 +22,7 @@ class CurrencyConverterViewModel {
     
     let bag: DisposeBag = .init()
     
-    lazy var amountRelay: BehaviorRelay<Conversion.ConversionDirection> = .init(value: .from(initialAmount))
+    let amountRelay: BehaviorRelay<Conversion.ConversionDirection> = .init(value: .from(1))
     let fromCurrencyRelay: BehaviorRelay<String> = .init(value: "")
     let toCurrencyRelay: BehaviorRelay<String> = .init(value: "")
     
@@ -43,7 +43,6 @@ extension CurrencyConverterViewModel: CurrencyConverterViewModelInput {
             switch result {
             case .success(let value):
                 currencySymbolsRelay.accept(value.symbols.sorted())
-                print(value.symbols)
                 
             case .failure(let error):
                 errorMessageRelay.accept(error.localizedDescription)
@@ -78,20 +77,16 @@ extension CurrencyConverterViewModel: CurrencyConverterViewModelOutput {
     var convertedCurrency: Driver<Conversion.ConversionDirection> {
         convertedCurrencyRelay.asDriver()
     }
-    
-    var initialAmount: Double {
-        1
-    }
 }
 
 extension CurrencyConverterViewModel {
-    func setupBindings() {
+    private func setupBindings() {
         Observable.combineLatest(
             amountRelay.asObservable(),
             fromCurrencyRelay.asObservable(),
             toCurrencyRelay.asObservable()
         )
-        .debounce(.milliseconds(800), scheduler: MainScheduler.instance)
+        .debounce(.milliseconds(750), scheduler: MainScheduler.instance)
         .filter { amount, from, to in
             amount.value > 0 && !from.isEmpty && !to.isEmpty
         }
@@ -106,7 +101,7 @@ extension CurrencyConverterViewModel {
         .disposed(by: bag)
     }
     
-    func convert(_ input: Conversion) {
+    private func convert(_ input: Conversion) {
         isLoadingRelay.accept(true)
         
         currenciesUseCase.convertCurrency(input) { [isLoadingRelay, errorMessageRelay, convertedCurrencyRelay] result in

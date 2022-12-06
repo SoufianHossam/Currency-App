@@ -70,7 +70,7 @@ class CurrencyConverterViewController: UIViewController {
 // MARK: Helpers
 extension CurrencyConverterViewController {
     private func setupTextFields() {
-        fromTextField.text = "\(viewModel.initialAmount)"
+        fromTextField.text = "\(viewModel.amountRelay.value.value)"
         
         fromTextField.keyboardType = .decimalPad
         toTextField.keyboardType = .decimalPad
