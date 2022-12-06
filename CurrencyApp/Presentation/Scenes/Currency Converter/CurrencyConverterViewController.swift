@@ -82,17 +82,17 @@ extension CurrencyConverterViewController {
     
     private func setupBindings() {
         viewModel.isLoading
-            .drive(activityIndicator.rx.isAnimating)
+            .bind(to: activityIndicator.rx.isAnimating)
             .disposed(by: bag)
         
         viewModel.isLoading
             .map { $0 ? 1 : 0 }
-            .drive(activityIndicator.rx.alpha)
+            .bind(to: activityIndicator.rx.alpha)
             .disposed(by: bag)
         
         viewModel.isLoading
             .map { !$0 }
-            .drive(
+            .bind(to:
                 fromButton.rx.isEnabled,
                 toButton.rx.isEnabled,
                 swapButton.rx.isEnabled
@@ -100,13 +100,13 @@ extension CurrencyConverterViewController {
             .disposed(by: bag)
         
         viewModel.currencySymbols
-            .drive { [listViewController] list in
+            .subscribe { [listViewController] list in
                 listViewController.items = list
             }
             .disposed(by: bag)
         
         viewModel.errorMessage
-            .emit { message in
+            .subscribe { message in
                 print(message)
             }
             .disposed(by: bag)
@@ -127,7 +127,8 @@ extension CurrencyConverterViewController {
             .disposed(by: bag)
         
         viewModel.convertedCurrency
-            .drive { [weak self] in
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
                 switch $0 {
                 case .to:
                     self?.fromTextField.text = "\($0.value)"
@@ -135,7 +136,7 @@ extension CurrencyConverterViewController {
                 case .from:
                     self?.toTextField.text = "\($0.value)"
                 }
-            }
+            })
             .disposed(by: bag)
         
         viewModel.fromCurrencyRelay

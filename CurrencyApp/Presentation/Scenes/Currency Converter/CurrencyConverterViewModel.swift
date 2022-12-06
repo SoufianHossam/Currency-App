@@ -64,20 +64,20 @@ extension CurrencyConverterViewModel: CurrencyConverterViewModelInput {
 // MARK: CurrencyConverterViewModelOutput
 extension CurrencyConverterViewModel: CurrencyConverterViewModelOutput {
     // RX Public Properties
-    var currencySymbols: Driver<[String]> {
-        currencySymbolsRelay.asDriver()
+    var currencySymbols: Observable<[String]> {
+        currencySymbolsRelay.asObservable()
     }
     
-    var errorMessage: Signal<String> {
-        errorMessageRelay.asSignal()
+    var errorMessage: Observable<String> {
+        errorMessageRelay.asObservable()
     }
     
-    var isLoading: Driver<Bool> {
-        isLoadingRelay.asDriver(onErrorJustReturn: false)
+    var isLoading: Observable<Bool> {
+        isLoadingRelay.asObservable()
     }
     
-    var convertedCurrency: Driver<Conversion.ConversionDirection> {
-        convertedCurrencyRelay.asDriver()
+    var convertedCurrency: Observable<Conversion.ConversionDirection> {
+        convertedCurrencyRelay.asObservable()
     }
     
     var isCurrenciesSelected: Observable<Bool> {
