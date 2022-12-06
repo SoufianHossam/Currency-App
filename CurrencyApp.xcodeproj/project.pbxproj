@@ -16,6 +16,15 @@
 		3E7E959C293CCA0A00B15686 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3E7E959B293CCA0A00B15686 /* RxCocoa */; };
 		3E7E959E293CCA0A00B15686 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 3E7E959D293CCA0A00B15686 /* RxRelay */; };
 		3E7E95A0293CCA0A00B15686 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3E7E959F293CCA0A00B15686 /* RxSwift */; };
+		3EC91D2D293F2576000392AB /* HistoricalDataViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC91D29293F2576000392AB /* HistoricalDataViewModelType.swift */; };
+		3EC91D2E293F2576000392AB /* HistoricalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC91D2A293F2576000392AB /* HistoricalDataViewController.swift */; };
+		3EC91D2F293F2576000392AB /* HistoricalDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC91D2B293F2576000392AB /* HistoricalDataViewModel.swift */; };
+		3EC91D30293F2576000392AB /* HistoricalDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC91D2C293F2576000392AB /* HistoricalDataViewController.xib */; };
+		3EC91D32293F2713000392AB /* HistoricalDataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC91D31293F2713000392AB /* HistoricalDataDTO.swift */; };
+		3EC91D34293F2A37000392AB /* HistoricalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC91D33293F2A37000392AB /* HistoricalData.swift */; };
+		3EC91D36293F31B0000392AB /* Date + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC91D35293F31B0000392AB /* Date + Extensions.swift */; };
+		3EC91D39293F50A2000392AB /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 3EC91D38293F50A2000392AB /* RxDataSources */; };
+		3EC91D3C293F5462000392AB /* SectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC91D3B293F5462000392AB /* SectionModel.swift */; };
 		3ED58575293B609600CB46E8 /* CurrencyConverterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED58574293B609600CB46E8 /* CurrencyConverterViewController.xib */; };
 		3ED58578293B633700CB46E8 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED58576293B633700CB46E8 /* ListViewController.swift */; };
 		3ED58579293B633700CB46E8 /* ListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED58577293B633700CB46E8 /* ListViewController.xib */; };
@@ -43,6 +52,14 @@
 		3E7E9594293CC6C800B15686 /* CurrencyConverterViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterViewModelType.swift; sourceTree = "<group>"; };
 		3E7E9595293CC6C800B15686 /* CurrencyConverterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterViewModel.swift; sourceTree = "<group>"; };
 		3E7E9598293CC70500B15686 /* CurrencyConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterViewController.swift; sourceTree = "<group>"; };
+		3EC91D29293F2576000392AB /* HistoricalDataViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalDataViewModelType.swift; sourceTree = "<group>"; };
+		3EC91D2A293F2576000392AB /* HistoricalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalDataViewController.swift; sourceTree = "<group>"; };
+		3EC91D2B293F2576000392AB /* HistoricalDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalDataViewModel.swift; sourceTree = "<group>"; };
+		3EC91D2C293F2576000392AB /* HistoricalDataViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoricalDataViewController.xib; sourceTree = "<group>"; };
+		3EC91D31293F2713000392AB /* HistoricalDataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalDataDTO.swift; sourceTree = "<group>"; };
+		3EC91D33293F2A37000392AB /* HistoricalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalData.swift; sourceTree = "<group>"; };
+		3EC91D35293F31B0000392AB /* Date + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extensions.swift"; sourceTree = "<group>"; };
+		3EC91D3B293F5462000392AB /* SectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionModel.swift; sourceTree = "<group>"; };
 		3ED58574293B609600CB46E8 /* CurrencyConverterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyConverterViewController.xib; sourceTree = "<group>"; };
 		3ED58576293B633700CB46E8 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		3ED58577293B633700CB46E8 /* ListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListViewController.xib; sourceTree = "<group>"; };
@@ -71,6 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E7E95A0293CCA0A00B15686 /* RxSwift in Frameworks */,
+				3EC91D39293F50A2000392AB /* RxDataSources in Frameworks */,
 				3E7E959E293CCA0A00B15686 /* RxRelay in Frameworks */,
 				3E7E959C293CCA0A00B15686 /* RxCocoa in Frameworks */,
 			);
@@ -101,6 +119,26 @@
 				3E7E9592293CC00A00B15686 /* CurrenciesUseCase.swift */,
 			);
 			path = UseCases;
+			sourceTree = "<group>";
+		};
+		3EC91D28293F2521000392AB /* Historical Data */ = {
+			isa = PBXGroup;
+			children = (
+				3EC91D2A293F2576000392AB /* HistoricalDataViewController.swift */,
+				3EC91D2C293F2576000392AB /* HistoricalDataViewController.xib */,
+				3EC91D29293F2576000392AB /* HistoricalDataViewModelType.swift */,
+				3EC91D2B293F2576000392AB /* HistoricalDataViewModel.swift */,
+				3EC91D3A293F544E000392AB /* Section Model Entity */,
+			);
+			path = "Historical Data";
+			sourceTree = "<group>";
+		};
+		3EC91D3A293F544E000392AB /* Section Model Entity */ = {
+			isa = PBXGroup;
+			children = (
+				3EC91D3B293F5462000392AB /* SectionModel.swift */,
+			);
+			path = "Section Model Entity";
 			sourceTree = "<group>";
 		};
 		3ED5857A293B6FAF00CB46E8 /* Domain */ = {
@@ -154,7 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				3ED58588293B7A9400CB46E8 /* Currency Converter */,
-				3ED58587293B7A8300CB46E8 /* List View Controller */,
+				3EC91D28293F2521000392AB /* Historical Data */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -164,6 +202,7 @@
 			children = (
 				3ED58581293B77BF00CB46E8 /* Currencies.swift */,
 				3EE32477293D62C900039B54 /* Conversion.swift */,
+				3EC91D33293F2A37000392AB /* HistoricalData.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -183,6 +222,7 @@
 			children = (
 				3ED58585293B782E00CB46E8 /* CurrenciesDTO.swift */,
 				3EE32475293D5FB000039B54 /* ConversionDTO.swift */,
+				3EC91D31293F2713000392AB /* HistoricalDataDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -203,6 +243,7 @@
 				3ED58574293B609600CB46E8 /* CurrencyConverterViewController.xib */,
 				3E7E9594293CC6C800B15686 /* CurrencyConverterViewModelType.swift */,
 				3E7E9595293CC6C800B15686 /* CurrencyConverterViewModel.swift */,
+				3ED58587293B7A8300CB46E8 /* List View Controller */,
 			);
 			path = "Currency Converter";
 			sourceTree = "<group>";
@@ -219,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				3ED58593293BD70500CB46E8 /* Encodable As Dictionary.swift */,
+				3EC91D35293F31B0000392AB /* Date + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -291,6 +333,7 @@
 				3E7E959B293CCA0A00B15686 /* RxCocoa */,
 				3E7E959D293CCA0A00B15686 /* RxRelay */,
 				3E7E959F293CCA0A00B15686 /* RxSwift */,
+				3EC91D38293F50A2000392AB /* RxDataSources */,
 			);
 			productName = CurrencyApp;
 			productReference = 3ED99D44293A6AB2007A12AA /* CurrencyApp.app */;
@@ -322,6 +365,7 @@
 			mainGroup = 3ED99D3B293A6AB2007A12AA;
 			packageReferences = (
 				3E7E959A293CCA0A00B15686 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				3EC91D37293F50A2000392AB /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = 3ED99D45293A6AB2007A12AA /* Products */;
 			projectDirPath = "";
@@ -339,6 +383,7 @@
 			files = (
 				3ED58575293B609600CB46E8 /* CurrencyConverterViewController.xib in Resources */,
 				3ED99D54293A6AB4007A12AA /* LaunchScreen.storyboard in Resources */,
+				3EC91D30293F2576000392AB /* HistoricalDataViewController.xib in Resources */,
 				3ED58579293B633700CB46E8 /* ListViewController.xib in Resources */,
 				3ED99D51293A6AB4007A12AA /* Assets.xcassets in Resources */,
 			);
@@ -356,17 +401,24 @@
 				3ED58590293BCF0600CB46E8 /* NetworkClient.swift in Sources */,
 				3ED58582293B77BF00CB46E8 /* Currencies.swift in Sources */,
 				3E7E9596293CC6C800B15686 /* CurrencyConverterViewModelType.swift in Sources */,
+				3EC91D32293F2713000392AB /* HistoricalDataDTO.swift in Sources */,
 				3ED58586293B782E00CB46E8 /* CurrenciesDTO.swift in Sources */,
 				3ED58594293BD70500CB46E8 /* Encodable As Dictionary.swift in Sources */,
 				3ED5858A293B8A6300CB46E8 /* NetworkConfigurations.swift in Sources */,
 				3E7E9590293CB87F00B15686 /* CurrenciesRepository.swift in Sources */,
 				3E7E9593293CC00A00B15686 /* CurrenciesUseCase.swift in Sources */,
+				3EC91D36293F31B0000392AB /* Date + Extensions.swift in Sources */,
+				3EC91D2F293F2576000392AB /* HistoricalDataViewModel.swift in Sources */,
 				3ED5858E293BC62700CB46E8 /* Endpoints.swift in Sources */,
 				3EE32476293D5FB000039B54 /* ConversionDTO.swift in Sources */,
 				3ED99D48293A6AB2007A12AA /* AppDelegate.swift in Sources */,
 				3ED58598293BD7A600CB46E8 /* NetworkingManager.swift in Sources */,
 				3ED99D5C293A7827007A12AA /* AppConfigurations.swift in Sources */,
+				3EC91D34293F2A37000392AB /* HistoricalData.swift in Sources */,
 				3E7E9597293CC6C800B15686 /* CurrencyConverterViewModel.swift in Sources */,
+				3EC91D3C293F5462000392AB /* SectionModel.swift in Sources */,
+				3EC91D2E293F2576000392AB /* HistoricalDataViewController.swift in Sources */,
+				3EC91D2D293F2576000392AB /* HistoricalDataViewModelType.swift in Sources */,
 				3ED58578293B633700CB46E8 /* ListViewController.swift in Sources */,
 				3E7E9599293CC70500B15686 /* CurrencyConverterViewController.swift in Sources */,
 				3ED5858C293B8A7200CB46E8 /* Request.swift in Sources */,
@@ -506,7 +558,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				API_BASE_URL = "https://api.apilayer.com/fixer/";
-				API_KEY = dlvBthberLJo2Tba9CrsuXz5VGNnDVUs;
+				API_KEY = AXKxrLmNdrAcweX1k5382Ld1nPy9bgAh;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -517,6 +569,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -526,7 +579,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -534,7 +587,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				API_BASE_URL = "https://api.apilayer.com/fixer/";
-				API_KEY = dlvBthberLJo2Tba9CrsuXz5VGNnDVUs;
+				API_KEY = AXKxrLmNdrAcweX1k5382Ld1nPy9bgAh;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -545,6 +598,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -554,7 +608,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -590,6 +644,14 @@
 				version = 6.5.0;
 			};
 		};
+		3EC91D37293F50A2000392AB /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -607,6 +669,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3E7E959A293CCA0A00B15686 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		3EC91D38293F50A2000392AB /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3EC91D37293F50A2000392AB /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

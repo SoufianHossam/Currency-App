@@ -4,12 +4,14 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CurrencyConverterViewController" customModule="CurrencyApp" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="AKo-gZ-1fa" id="CoV-L2-vJn"/>
+                <outlet property="detailsButton" destination="IB7-WE-7To" id="caB-37-qrx"/>
                 <outlet property="fromButton" destination="H9e-or-aTD" id="7uj-2p-tir"/>
                 <outlet property="fromTextField" destination="cNs-O5-O0h" id="4RA-Pf-9NH"/>
                 <outlet property="swapButton" destination="m7X-bE-KIH" id="0dT-CI-m8k"/>
@@ -24,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="IG8-tB-Gqz">
-                    <rect key="frame" x="62" y="357" width="290" height="182"/>
+                    <rect key="frame" x="62" y="321.5" width="290" height="253"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="xco-5f-Zgw">
                             <rect key="frame" x="0.0" y="0.0" width="290" height="31"/>
@@ -77,15 +79,23 @@
                                 </textField>
                             </subviews>
                         </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IB7-WE-7To">
+                            <rect key="frame" x="0.0" y="145" width="290" height="31"/>
+                            <color key="tintColor" systemColor="tintColor"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Details">
+                                <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                            </buttonConfiguration>
+                        </button>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="AKo-gZ-1fa">
-                            <rect key="frame" x="0.0" y="145" width="290" height="37"/>
+                            <rect key="frame" x="0.0" y="216" width="290" height="37"/>
                             <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </activityIndicatorView>
                     </subviews>
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" systemColor="systemGray5Color"/>
             <constraints>
                 <constraint firstItem="IG8-tB-Gqz" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.7" id="5ut-Xp-Nah"/>
                 <constraint firstItem="IG8-tB-Gqz" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="p0B-HS-Jpl"/>
@@ -94,4 +104,12 @@
             <point key="canvasLocation" x="-457.97101449275368" y="126.5625"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

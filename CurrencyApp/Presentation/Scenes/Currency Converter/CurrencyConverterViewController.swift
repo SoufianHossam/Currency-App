@@ -17,6 +17,7 @@ class CurrencyConverterViewController: UIViewController {
     @IBOutlet private weak var fromTextField: UITextField!
     @IBOutlet private weak var toTextField: UITextField!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var detailsButton: UIButton!
     
     // MARK: Properties
     private let viewModel: CurrencyConverterViewModelType
@@ -142,6 +143,21 @@ extension CurrencyConverterViewController {
         viewModel.toCurrencyRelay
             .skip(1)
             .bind(to: toButton.rx.title(for: .normal))
+            .disposed(by: bag)
+        
+        viewModel.isCurrenciesSelected
+            .bind(to: detailsButton.rx.isEnabled)
+            .disposed(by: bag)
+        
+        detailsButton.rx.tap
+            .bind(to: viewModel.detailsRelay)
+            .disposed(by: bag)
+        
+        viewModel.selectedCurrenciesDetails
+            .subscribe(with: self) { viewController, currencies in
+                let viewModel = HistoricalDataViewModel(fromCurrency: currencies.0, toCurrency: currencies.1)
+                viewController.present(HistoricalDataViewController(viewModel: viewModel), animated: true)
+            }
             .disposed(by: bag)
     }
 }
