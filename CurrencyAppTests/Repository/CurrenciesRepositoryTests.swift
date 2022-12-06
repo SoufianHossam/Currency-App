@@ -24,7 +24,6 @@ class CurrenciesRepositoryTests: XCTestCase {
         sut = nil
     }
 
-
     func testFetchCurrencySymbols() {
         // When
         sut.fetchCurrencySymbols { _ in }

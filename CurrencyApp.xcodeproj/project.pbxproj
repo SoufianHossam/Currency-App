@@ -31,6 +31,8 @@
 		3EC91D69293F9828000392AB /* Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC91D68293F9828000392AB /* Stubs.swift */; };
 		3EC91D6C293FA00A000392AB /* NetworkClientSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC91D6B293FA00A000392AB /* NetworkClientSpy.swift */; };
 		3EC91D6E293FA33C000392AB /* CurrenciesRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC91D6D293FA33C000392AB /* CurrenciesRepositoryTests.swift */; };
+		3EC91D71293FA7B3000392AB /* CurrencyConverterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC91D70293FA7B3000392AB /* CurrencyConverterViewModelTests.swift */; };
+		3EC91D73293FA80C000392AB /* CurrenciesUseCaseSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC91D72293FA80C000392AB /* CurrenciesUseCaseSpy.swift */; };
 		3ED58575293B609600CB46E8 /* CurrencyConverterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED58574293B609600CB46E8 /* CurrencyConverterViewController.xib */; };
 		3ED58578293B633700CB46E8 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED58576293B633700CB46E8 /* ListViewController.swift */; };
 		3ED58579293B633700CB46E8 /* ListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED58577293B633700CB46E8 /* ListViewController.xib */; };
@@ -83,6 +85,8 @@
 		3EC91D68293F9828000392AB /* Stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stubs.swift; sourceTree = "<group>"; };
 		3EC91D6B293FA00A000392AB /* NetworkClientSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientSpy.swift; sourceTree = "<group>"; };
 		3EC91D6D293FA33C000392AB /* CurrenciesRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesRepositoryTests.swift; sourceTree = "<group>"; };
+		3EC91D70293FA7B3000392AB /* CurrencyConverterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterViewModelTests.swift; sourceTree = "<group>"; };
+		3EC91D72293FA80C000392AB /* CurrenciesUseCaseSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesUseCaseSpy.swift; sourceTree = "<group>"; };
 		3ED58574293B609600CB46E8 /* CurrencyConverterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyConverterViewController.xib; sourceTree = "<group>"; };
 		3ED58576293B633700CB46E8 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		3ED58577293B633700CB46E8 /* ListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListViewController.xib; sourceTree = "<group>"; };
@@ -177,6 +181,7 @@
 				3EC91D68293F9828000392AB /* Stubs.swift */,
 				3EC91D65293F9600000392AB /* Domain */,
 				3EC91D6A293F9E84000392AB /* Repository */,
+				3EC91D6F293FA796000392AB /* Presentation */,
 			);
 			path = CurrencyAppTests;
 			sourceTree = "<group>";
@@ -197,6 +202,15 @@
 				3EC91D6D293FA33C000392AB /* CurrenciesRepositoryTests.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		3EC91D6F293FA796000392AB /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				3EC91D72293FA80C000392AB /* CurrenciesUseCaseSpy.swift */,
+				3EC91D70293FA7B3000392AB /* CurrencyConverterViewModelTests.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		3ED5857A293B6FAF00CB46E8 /* Domain */ = {
@@ -487,8 +501,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EC91D73293FA80C000392AB /* CurrenciesUseCaseSpy.swift in Sources */,
 				3EC91D6E293FA33C000392AB /* CurrenciesRepositoryTests.swift in Sources */,
 				3EC91D6C293FA00A000392AB /* NetworkClientSpy.swift in Sources */,
+				3EC91D71293FA7B3000392AB /* CurrencyConverterViewModelTests.swift in Sources */,
 				3EC91D69293F9828000392AB /* Stubs.swift in Sources */,
 				3EC91D67293F960C000392AB /* CurrenciesUseCaseTests.swift in Sources */,
 				3EC91D66293F960C000392AB /* RepoSpy.swift in Sources */,

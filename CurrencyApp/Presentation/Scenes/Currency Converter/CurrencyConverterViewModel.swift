@@ -131,6 +131,7 @@ extension CurrencyConverterViewModel {
                 switch input.valueSource {
                 case .from:
                     convertedCurrencyRelay.accept(.from(value.value))
+                    
                 case .to:
                     convertedCurrencyRelay.accept(.to(value.value))
                 }
