@@ -24,5 +24,5 @@ protocol HistoricalDataViewModelInput {
 protocol HistoricalDataViewModelOutput {
     var errorMessage: Observable<String> { get }
     var isLoading: Observable<Bool> { get }
-    var ratesList: Observable<[HistoricalData.Rate]> { get }
+    var sectionData: Observable<[SectionData]> { get }
 }

@@ -68,7 +68,21 @@ extension HistoricalDataViewModel: HistoricalDataViewModelOutput {
         isLoadingRelay.asObservable()
     }
     
-    var ratesList: Observable<[HistoricalData.Rate]> {
-        ratesListRelay.asObservable()
+    var sectionData: Observable<[SectionData]> {
+        ratesListRelay
+            .map { [unowned self] rates in
+                rates.map(self.makeSectionData)
+            }
+            .asObservable()
+    }
+}
+
+private extension HistoricalDataViewModel {
+    func makeSectionData(_ rate: HistoricalData.Rate) -> SectionData {
+        let items = rate.values.map {
+            "1 \(fromCurrency) = \($0) \(toCurrency)"
+        }
+        
+        return .init(header: rate.date, items: items)
     }
 }

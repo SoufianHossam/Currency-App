@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class HistoricalDataViewController: UIViewController {
     // MARK: Outlets
@@ -24,7 +25,6 @@ class HistoricalDataViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
-    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -33,12 +33,33 @@ class HistoricalDataViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupTableView()
         setupBindings()
+        
+        viewModel.fetchHistoricalData()
     }
 }
 
 // MARK: - Private Handlers
 private extension HistoricalDataViewController {
+    func setupTableView() {
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionData>(
+          configureCell: { _, _, _, item in
+              let cell = UITableViewCell()
+              var configuration = UIListContentConfiguration.cell()
+              configuration.text = item
+              cell.contentConfiguration = configuration
+            return cell
+        })
+        
+        dataSource.titleForHeaderInSection = { dataSource, index in
+          dataSource.sectionModels[index].header
+        }
+        
+        viewModel.sectionData
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: bag)
+    }
     
     func setupBindings() {
         viewModel.isLoading

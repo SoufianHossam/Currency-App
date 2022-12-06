@@ -23,6 +23,8 @@
 		3EC91D32293F2713000392AB /* HistoricalDataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC91D31293F2713000392AB /* HistoricalDataDTO.swift */; };
 		3EC91D34293F2A37000392AB /* HistoricalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC91D33293F2A37000392AB /* HistoricalData.swift */; };
 		3EC91D36293F31B0000392AB /* Date + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC91D35293F31B0000392AB /* Date + Extensions.swift */; };
+		3EC91D39293F50A2000392AB /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 3EC91D38293F50A2000392AB /* RxDataSources */; };
+		3EC91D3C293F5462000392AB /* SectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC91D3B293F5462000392AB /* SectionModel.swift */; };
 		3ED58575293B609600CB46E8 /* CurrencyConverterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED58574293B609600CB46E8 /* CurrencyConverterViewController.xib */; };
 		3ED58578293B633700CB46E8 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED58576293B633700CB46E8 /* ListViewController.swift */; };
 		3ED58579293B633700CB46E8 /* ListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED58577293B633700CB46E8 /* ListViewController.xib */; };
@@ -57,6 +59,7 @@
 		3EC91D31293F2713000392AB /* HistoricalDataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalDataDTO.swift; sourceTree = "<group>"; };
 		3EC91D33293F2A37000392AB /* HistoricalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalData.swift; sourceTree = "<group>"; };
 		3EC91D35293F31B0000392AB /* Date + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extensions.swift"; sourceTree = "<group>"; };
+		3EC91D3B293F5462000392AB /* SectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionModel.swift; sourceTree = "<group>"; };
 		3ED58574293B609600CB46E8 /* CurrencyConverterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyConverterViewController.xib; sourceTree = "<group>"; };
 		3ED58576293B633700CB46E8 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		3ED58577293B633700CB46E8 /* ListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListViewController.xib; sourceTree = "<group>"; };
@@ -85,6 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E7E95A0293CCA0A00B15686 /* RxSwift in Frameworks */,
+				3EC91D39293F50A2000392AB /* RxDataSources in Frameworks */,
 				3E7E959E293CCA0A00B15686 /* RxRelay in Frameworks */,
 				3E7E959C293CCA0A00B15686 /* RxCocoa in Frameworks */,
 			);
@@ -124,8 +128,17 @@
 				3EC91D2C293F2576000392AB /* HistoricalDataViewController.xib */,
 				3EC91D29293F2576000392AB /* HistoricalDataViewModelType.swift */,
 				3EC91D2B293F2576000392AB /* HistoricalDataViewModel.swift */,
+				3EC91D3A293F544E000392AB /* Section Model Entity */,
 			);
 			path = "Historical Data";
+			sourceTree = "<group>";
+		};
+		3EC91D3A293F544E000392AB /* Section Model Entity */ = {
+			isa = PBXGroup;
+			children = (
+				3EC91D3B293F5462000392AB /* SectionModel.swift */,
+			);
+			path = "Section Model Entity";
 			sourceTree = "<group>";
 		};
 		3ED5857A293B6FAF00CB46E8 /* Domain */ = {
@@ -320,6 +333,7 @@
 				3E7E959B293CCA0A00B15686 /* RxCocoa */,
 				3E7E959D293CCA0A00B15686 /* RxRelay */,
 				3E7E959F293CCA0A00B15686 /* RxSwift */,
+				3EC91D38293F50A2000392AB /* RxDataSources */,
 			);
 			productName = CurrencyApp;
 			productReference = 3ED99D44293A6AB2007A12AA /* CurrencyApp.app */;
@@ -351,6 +365,7 @@
 			mainGroup = 3ED99D3B293A6AB2007A12AA;
 			packageReferences = (
 				3E7E959A293CCA0A00B15686 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				3EC91D37293F50A2000392AB /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = 3ED99D45293A6AB2007A12AA /* Products */;
 			projectDirPath = "";
@@ -401,6 +416,7 @@
 				3ED99D5C293A7827007A12AA /* AppConfigurations.swift in Sources */,
 				3EC91D34293F2A37000392AB /* HistoricalData.swift in Sources */,
 				3E7E9597293CC6C800B15686 /* CurrencyConverterViewModel.swift in Sources */,
+				3EC91D3C293F5462000392AB /* SectionModel.swift in Sources */,
 				3EC91D2E293F2576000392AB /* HistoricalDataViewController.swift in Sources */,
 				3EC91D2D293F2576000392AB /* HistoricalDataViewModelType.swift in Sources */,
 				3ED58578293B633700CB46E8 /* ListViewController.swift in Sources */,
@@ -628,6 +644,14 @@
 				version = 6.5.0;
 			};
 		};
+		3EC91D37293F50A2000392AB /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -645,6 +669,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3E7E959A293CCA0A00B15686 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		3EC91D38293F50A2000392AB /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3EC91D37293F50A2000392AB /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

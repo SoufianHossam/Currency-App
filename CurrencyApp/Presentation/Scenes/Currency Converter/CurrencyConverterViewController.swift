@@ -155,8 +155,8 @@ extension CurrencyConverterViewController {
         
         viewModel.selectedCurrenciesDetails
             .subscribe(with: self) { viewController, currencies in
-                print(currencies)
-                viewController.present(ListViewController(), animated: true)
+                let viewModel = HistoricalDataViewModel(fromCurrency: currencies.0, toCurrency: currencies.1)
+                viewController.present(HistoricalDataViewController(viewModel: viewModel), animated: true)
             }
             .disposed(by: bag)
     }
