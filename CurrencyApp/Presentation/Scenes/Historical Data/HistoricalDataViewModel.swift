@@ -71,7 +71,9 @@ extension HistoricalDataViewModel: HistoricalDataViewModelOutput {
     var sectionData: Observable<[SectionData]> {
         ratesListRelay
             .map { [unowned self] rates in
-                rates.map(self.makeSectionData)
+                rates
+                    .sorted(by: <)
+                    .map(self.makeSectionData)
             }
             .asObservable()
     }
@@ -84,5 +86,19 @@ private extension HistoricalDataViewModel {
         }
         
         return .init(header: rate.date, items: items)
+    }
+}
+
+extension HistoricalData.Rate {
+    static func < (lhs: HistoricalData.Rate, rhs: HistoricalData.Rate) -> Bool {
+        lhs.date.asDate < rhs.date.asDate
+    }
+}
+
+private extension String {
+    var asDate: Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.date(from: self)!
     }
 }
