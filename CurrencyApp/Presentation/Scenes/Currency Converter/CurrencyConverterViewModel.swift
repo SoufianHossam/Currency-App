@@ -25,6 +25,7 @@ class CurrencyConverterViewModel {
     let amountRelay: BehaviorRelay<Conversion.ConversionDirection> = .init(value: .from(1))
     let fromCurrencyRelay: BehaviorRelay<String> = .init(value: "")
     let toCurrencyRelay: BehaviorRelay<String> = .init(value: "")
+    let detailsRelay: PublishRelay<Void> = .init()
     
     init(_ currenciesUseCase: CurrenciesUseCaseProtocol = CurrenciesUseCase()) {
         self.currenciesUseCase = currenciesUseCase
@@ -51,7 +52,8 @@ extension CurrencyConverterViewModel: CurrencyConverterViewModelInput {
     }
     
     func swapTheConversion() {
-        var tempCurrency: String = ""
+        guard !fromCurrencyRelay.value.isEmpty && !toCurrencyRelay.value.isEmpty else { return }
+        var tempCurrency: String
         
         tempCurrency = fromCurrencyRelay.value
         fromCurrencyRelay.accept(toCurrencyRelay.value)
@@ -77,6 +79,14 @@ extension CurrencyConverterViewModel: CurrencyConverterViewModelOutput {
     var convertedCurrency: Driver<Conversion.ConversionDirection> {
         convertedCurrencyRelay.asDriver()
     }
+    
+    var isCurrenciesSelected: Observable<Bool> {
+        Observable.combineLatest(
+            fromCurrencyRelay.asObservable(),
+            toCurrencyRelay.asObservable()
+        )
+        .map { !$0.0.isEmpty && !$0.1.isEmpty }
+    }
 }
 
 extension CurrencyConverterViewModel {
@@ -98,6 +108,11 @@ extension CurrencyConverterViewModel {
             )
             self?.convert(input)
         }
+        .disposed(by: bag)
+        
+        detailsRelay.subscribe(onNext: {
+            
+        })
         .disposed(by: bag)
     }
     

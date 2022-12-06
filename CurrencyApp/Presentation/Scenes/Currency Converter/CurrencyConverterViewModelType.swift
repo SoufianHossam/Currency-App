@@ -7,6 +7,8 @@
 
 import RxRelay
 import RxCocoa
+import RxSwift
+import Foundation
 
 /// CurrencyConverter Input & Output
 ///
@@ -18,6 +20,7 @@ protocol CurrencyConverterViewModelInput {
     var amountRelay: BehaviorRelay<Conversion.ConversionDirection> { get }
     var fromCurrencyRelay: BehaviorRelay<String> { get }
     var toCurrencyRelay: BehaviorRelay<String> { get }
+    var detailsRelay: PublishRelay<Void> { get }
     
     func fetchCurrencySymbols()
     func swapTheConversion()
@@ -30,4 +33,5 @@ protocol CurrencyConverterViewModelOutput {
     var currencySymbols: Driver<[String]> { get }
     var errorMessage: Signal<String> { get }
     var isLoading: Driver<Bool> { get }
+    var isCurrenciesSelected: Observable<Bool> { get }
 }
