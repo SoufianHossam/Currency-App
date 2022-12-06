@@ -21,12 +21,15 @@ class CurrencyConverterViewController: UIViewController {
     
     // MARK: Properties
     private let viewModel: CurrencyConverterViewModelType
+    private let router: CurrencyConvertRouterProtocol
     private let listViewController = ListViewController()
     private let bag: DisposeBag = .init()
     
     // MARK: Init
-    init(viewModel: CurrencyConverterViewModelType) {
+    init(viewModel: CurrencyConverterViewModelType,
+         router: CurrencyConvertRouterProtocol) {
         self.viewModel = viewModel
+        self.router = router
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -46,7 +49,7 @@ class CurrencyConverterViewController: UIViewController {
     
     // MARK: Actions
     @IBAction private func fromButtonAction(_ sender: UIButton) {
-        present(listViewController, animated: true)
+        router.routeTo(listViewController)
         
         listViewController.didSelectItem = { [weak self] item in
             self?.fromButton?.setTitle(item, for: .normal)
@@ -55,7 +58,7 @@ class CurrencyConverterViewController: UIViewController {
     }
     
     @IBAction private func toButtonAction(_ sender: UIButton) {
-        present(listViewController, animated: true)
+        router.routeTo(listViewController)
         
         listViewController.didSelectItem = { [weak self] item in
             self?.toButton?.setTitle(item, for: .normal)
@@ -155,8 +158,7 @@ extension CurrencyConverterViewController {
         
         viewModel.selectedCurrenciesDetails
             .subscribe(with: self) { viewController, currencies in
-                let viewModel = HistoricalDataViewModel(fromCurrency: currencies.0, toCurrency: currencies.1)
-                viewController.present(HistoricalDataViewController(viewModel: viewModel), animated: true)
+                viewController.router.routeToHistoricalDataScene(fromCurrency: currencies.0, toCurrency: currencies.1)
             }
             .disposed(by: bag)
     }
