@@ -15,6 +15,10 @@ typealias CurrencyConverterViewModelType = CurrencyConverterViewModelInput & Cur
 /// CurrencyConverter ViewModel Input
 ///
 protocol CurrencyConverterViewModelInput {
+    var amountRelay: BehaviorRelay<Conversion.ConversionDirection> { get }
+    var fromCurrencyRelay: BehaviorRelay<String> { get }
+    var toCurrencyRelay: BehaviorRelay<String> { get }
+    
     func fetchCurrencySymbols()
     func swapTheConversion()
 }
@@ -22,6 +26,7 @@ protocol CurrencyConverterViewModelInput {
 /// CurrencyConverter ViewModel Output
 ///
 protocol CurrencyConverterViewModelOutput {
+    var convertedCurrency: Driver<Conversion.ConversionDirection> { get }
     var currencySymbols: Driver<[String]> { get }
     var errorMessage: Signal<String> { get }
     var isLoading: Driver<Bool> { get }

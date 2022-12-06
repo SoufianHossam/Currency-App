@@ -7,19 +7,28 @@
 
 import RxRelay
 import RxCocoa
+import RxSwift
 
 // MARK: CurrencyConverterViewModel
 class CurrencyConverterViewModel {
     // Properties
-    let listCurrencySymbolsUseCase: ListCurrencySymbolsUseCaseProtocol
+    let currenciesUseCase: CurrenciesUseCaseProtocol
     
     // RX Properties
     private let currencySymbolsRelay: BehaviorRelay<[String]> = .init(value: [])
     private let errorMessageRelay: PublishRelay<String> = .init()
     private let isLoadingRelay: PublishRelay<Bool> = .init()
+    private let convertedCurrencyRelay: BehaviorRelay<Conversion.ConversionDirection> = .init(value: .from(0))
     
-    init(_ listCurrencySymbolsUseCase: ListCurrencySymbolsUseCaseProtocol = ListCurrencySymbolsUseCase()) {
-        self.listCurrencySymbolsUseCase = listCurrencySymbolsUseCase
+    let bag: DisposeBag = .init()
+    
+    let amountRelay: BehaviorRelay<Conversion.ConversionDirection> = .init(value: .from(1))
+    let fromCurrencyRelay: BehaviorRelay<String> = .init(value: "")
+    let toCurrencyRelay: BehaviorRelay<String> = .init(value: "")
+    
+    init(_ currenciesUseCase: CurrenciesUseCaseProtocol = CurrenciesUseCase()) {
+        self.currenciesUseCase = currenciesUseCase
+        setupBindings()
     }
 }
 
@@ -28,13 +37,12 @@ extension CurrencyConverterViewModel: CurrencyConverterViewModelInput {
     func fetchCurrencySymbols() {
         isLoadingRelay.accept(true)
         
-        listCurrencySymbolsUseCase.fetchCurrencySymbols { [isLoadingRelay, currencySymbolsRelay, errorMessageRelay] result in
+        currenciesUseCase.fetchCurrencySymbols { [isLoadingRelay, currencySymbolsRelay, errorMessageRelay] result in
             isLoadingRelay.accept(false)
             
             switch result {
             case .success(let value):
                 currencySymbolsRelay.accept(value.symbols.sorted())
-                print(value.symbols)
                 
             case .failure(let error):
                 errorMessageRelay.accept(error.localizedDescription)
@@ -43,7 +51,11 @@ extension CurrencyConverterViewModel: CurrencyConverterViewModelInput {
     }
     
     func swapTheConversion() {
+        var tempCurrency: String = ""
         
+        tempCurrency = fromCurrencyRelay.value
+        fromCurrencyRelay.accept(toCurrencyRelay.value)
+        toCurrencyRelay.accept(tempCurrency)
     }
 }
 
@@ -60,5 +72,53 @@ extension CurrencyConverterViewModel: CurrencyConverterViewModelOutput {
     
     var isLoading: Driver<Bool> {
         isLoadingRelay.asDriver(onErrorJustReturn: false)
+    }
+    
+    var convertedCurrency: Driver<Conversion.ConversionDirection> {
+        convertedCurrencyRelay.asDriver()
+    }
+}
+
+extension CurrencyConverterViewModel {
+    private func setupBindings() {
+        Observable.combineLatest(
+            amountRelay.asObservable(),
+            fromCurrencyRelay.asObservable(),
+            toCurrencyRelay.asObservable()
+        )
+        .debounce(.milliseconds(750), scheduler: MainScheduler.instance)
+        .filter { amount, from, to in
+            amount.value > 0 && !from.isEmpty && !to.isEmpty
+        }
+        .subscribe { [weak self] amount, from, to in
+            let input: Conversion = .init(
+                fromCurrency: from,
+                toCurrency: to,
+                amount: amount
+            )
+            self?.convert(input)
+        }
+        .disposed(by: bag)
+    }
+    
+    private func convert(_ input: Conversion) {
+        isLoadingRelay.accept(true)
+        
+        currenciesUseCase.convertCurrency(input) { [isLoadingRelay, errorMessageRelay, convertedCurrencyRelay] result in
+            isLoadingRelay.accept(false)
+
+            switch result {
+            case .success(let value):
+                switch input.amount {
+                case .from:
+                    convertedCurrencyRelay.accept(.from(value.value))
+                case .to:
+                    convertedCurrencyRelay.accept(.to(value.value))
+                }
+                
+            case .failure(let error):
+                errorMessageRelay.accept(error.localizedDescription)
+            }
+        }
     }
 }

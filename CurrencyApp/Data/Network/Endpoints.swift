@@ -11,4 +11,8 @@ enum Endpoints {
     static func currencySymbols() -> Request<CurrenciesDTO> {
         .init(path: "symbols")
     }
+    
+    static func convert(_ input: ConversionDTO) -> Request<ConvertedAmountDTO> {
+        .init(path: "convert", parameters: try? input.asDictionary())
+    }
 }
