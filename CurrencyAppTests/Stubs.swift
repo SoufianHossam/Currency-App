@@ -26,12 +26,12 @@ extension Conversion {
     static func stub(
         fromCurrency: String = "",
         toCurrency: String = "",
-        amount: ConversionDirection = .from(1)
+        valueSource: ConversionDirection = .from(1)
     ) -> Conversion {
         .init(
             fromCurrency: fromCurrency,
             toCurrency: toCurrency,
-            amount: amount
+            valueSource: valueSource
         )
     }
 }

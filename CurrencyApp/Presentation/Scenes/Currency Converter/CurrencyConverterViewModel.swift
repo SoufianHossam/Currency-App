@@ -113,7 +113,7 @@ extension CurrencyConverterViewModel {
             let input: Conversion = .init(
                 fromCurrency: from,
                 toCurrency: to,
-                amount: amount
+                valueSource: amount
             )
             self?.convert(input)
         }
@@ -128,7 +128,7 @@ extension CurrencyConverterViewModel {
 
             switch result {
             case .success(let value):
-                switch input.amount {
+                switch input.valueSource {
                 case .from:
                     convertedCurrencyRelay.accept(.from(value.value))
                 case .to:

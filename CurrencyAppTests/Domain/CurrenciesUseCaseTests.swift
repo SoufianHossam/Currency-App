@@ -55,7 +55,7 @@ class CurrenciesUseCaseTests: XCTestCase {
         // When
         sut.convertCurrency(.stub(fromCurrency: "EGP",
                                   toCurrency: "USD",
-                                  amount: .to(1))) { _ in }
+                                  valueSource: .to(1))) { _ in }
         
         // Then
         XCTAssertEqual(repoSpy.convertCurrencyCallCount, 1)

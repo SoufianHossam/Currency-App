@@ -10,7 +10,7 @@ import Foundation
 struct Conversion {
     let fromCurrency: String
     let toCurrency: String
-    let amount: ConversionDirection
+    let valueSource: ConversionDirection
 }
 
 extension Conversion {
