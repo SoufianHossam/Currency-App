@@ -29,10 +29,10 @@ protocol CurrencyConverterViewModelInput {
 /// CurrencyConverter ViewModel Output
 ///
 protocol CurrencyConverterViewModelOutput {
-    var convertedCurrency: Driver<Conversion.ConversionDirection> { get }
-    var currencySymbols: Driver<[String]> { get }
-    var errorMessage: Signal<String> { get }
-    var isLoading: Driver<Bool> { get }
+    var convertedCurrency: Observable<Conversion.ConversionDirection> { get }
+    var currencySymbols: Observable<[String]> { get }
+    var errorMessage: Observable<String> { get }
+    var isLoading: Observable<Bool> { get }
     var isCurrenciesSelected: Observable<Bool> { get }
     var selectedCurrenciesDetails: Observable<(String, String)> { get }
 }

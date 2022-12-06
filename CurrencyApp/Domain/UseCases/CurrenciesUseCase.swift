@@ -27,11 +27,11 @@ struct CurrenciesUseCase: CurrenciesUseCaseProtocol {
     func convertCurrency(_ input: Conversion, completion: @escaping (Result<ConvertedAmount, Error>) -> Void) {
         var cloneInput: Conversion = input
         
-        if case .to = input.amount {
+        if case .to = input.valueSource {
             let updatedInput: Conversion = .init(
                 fromCurrency: input.toCurrency,
                 toCurrency: input.fromCurrency,
-                amount: input.amount
+                valueSource: input.valueSource
             )
             cloneInput = updatedInput
         }
