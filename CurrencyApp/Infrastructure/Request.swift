@@ -13,6 +13,11 @@ enum NetworkError: Error {
     case noInternetConnection
     case parsing(Error)
     case networkFailure(String)
+    case badRequest
+    case unauthorized
+    case notFound
+    case tooManyRequests
+    case serverError
 }
 
 enum HTTPMethod: String {

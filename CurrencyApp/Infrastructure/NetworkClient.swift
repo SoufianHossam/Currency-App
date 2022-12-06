@@ -19,15 +19,15 @@ struct NetworkClient: NetworkClientProtocol {
             let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
                 
                 if let error = error {
-                    let customError: NetworkError
-                    
-                    if let _ = response as? HTTPURLResponse {
-                        customError = .networkFailure(error.localizedDescription)
-                    } else {
-                        customError = resolve(error: error)
-                    }
-                    
+                    let customError = resolve(error: error)
                     completion(.failure(customError))
+                }
+                
+                guard let response = response as? HTTPURLResponse,
+                      (200...299).contains(response.statusCode) else {
+                    let error = handleErrorStatusCode(response)
+                    completion(.failure(error))
+                    return
                 }
                 
                 guard let data = data else {
@@ -66,5 +66,30 @@ struct NetworkClient: NetworkClientProtocol {
             return .networkFailure(error.localizedDescription)
         }
     }
-}
+    
+    private func handleErrorStatusCode(_ response: URLResponse?) -> NetworkError {
+        guard let response = response as? HTTPURLResponse else {
+            return NetworkError.networkFailure("No Response")
+        }
 
+        switch response.statusCode {
+        case 400:
+            return NetworkError.badRequest
+            
+        case 401:
+            return NetworkError.unauthorized
+            
+        case 404:
+            return NetworkError.notFound
+            
+        case 429:
+            return NetworkError.tooManyRequests
+            
+        case _ where response.statusCode >= 500:
+            return NetworkError.serverError
+
+        default:
+            return NetworkError.networkFailure("Unknown status code")
+        }
+    }
+}
